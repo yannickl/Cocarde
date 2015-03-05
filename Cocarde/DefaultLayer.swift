@@ -51,11 +51,11 @@ final class DefaultLayer: CocardeLayer {
     let angle      = CGFloat(2 * M_PI / Double(segmentCount))
     let colorCount = segmentColors.count
     
-    let radius     = (min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / 2) / plotMaxScale / CGFloat(segmentCount)
+    let radius     = (min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / 2) / plotMaxScale
     let startAngle = CGFloat(0)
     let endAngle   = CGFloat(2 * M_PI)
     
-    for i in 0 ..< segmentCount {
+    for i in 0 ..< Int(segmentCount) {
       let circleRadius = radius * CGFloat(i)
       let plotLayer = CAShapeLayer()
       insertSublayer(plotLayer, atIndex: 0)
@@ -68,25 +68,49 @@ final class DefaultLayer: CocardeLayer {
       plotLayer.position  = center
       plotLayer.speed     = 0
       
-      var scaleValues: [CGFloat] = []
+      let group = CAAnimationGroup()
       
-      for j in 0 ..< segmentCount {
+      var scaleValues: [CGFloat] = []
+      var fadeValues:[CGFloat]   = []
+      
+      for j in 0 ..< Int(segmentCount) {
+        let previous  = Int(j - 1) % Int(segmentCount)
+        let next      = Int(j + 1) % Int(segmentCount)
+        let afterNext = Int(j + 2) % Int(segmentCount)
+        
         if i == j {
           scaleValues.append(plotMaxScale)
         }
         else {
           scaleValues.append(0)
         }
+        
+        if i == j {
+          fadeValues.append(0)
+        }
+        else {
+          fadeValues.append(1)
+        }
       }
+
+      let scaleAnim         = CAKeyframeAnimation(keyPath: "transform.scale")
+      scaleAnim.duration    = loopDuration
+      scaleAnim.cumulative  = false
+      scaleAnim.values      = scaleValues
       
-      let anim            = CAKeyframeAnimation(keyPath: "transform.scale")
-      anim.duration       = loopDuration
-      anim.cumulative     = false
-      anim.repeatCount    = Float.infinity
-      anim.values         = scaleValues
-      //anim.timeOffset     = (loopDuration / Double(segmentCount)) * Double(i)
-      anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-      plotLayer.addAnimation(anim, forKey: "plot.scale")
+      let fadeAnim                 = CAKeyframeAnimation(keyPath: "opacity")
+      fadeAnim.duration            = loopDuration
+      fadeAnim.cumulative          = false
+      fadeAnim.values              = fadeValues
+      fadeAnim.removedOnCompletion = false
+      fadeAnim.fillMode            = kCAFillModeForwards
+      
+      group.animations  = [scaleAnim, fadeAnim]
+      group.duration    = loopDuration
+      group.repeatCount = Float.infinity
+      group.autoreverses = true
+      
+      plotLayer.addAnimation(group, forKey: "circle.group")
     }
   }
 }

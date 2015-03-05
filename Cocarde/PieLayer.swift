@@ -69,14 +69,13 @@ final class PieLayer: CocardeLayer {
       plotLayer.position  = center
       plotLayer.speed     = 0
       
-      let anim         = CAKeyframeAnimation(keyPath: "transform.scale")
-      anim.duration    = plotScaleDuration
-      anim.cumulative  = false
-      anim.repeatCount = Float.infinity
-      anim.values      = [plotMinScale, plotMaxScale, plotMinScale]
-      anim.keyTimes    = [0, 0.5, 1.0]
-      anim.timeOffset  = (plotScaleDuration / 4) * Double(i % 4)
-      anim.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      let anim            = CAKeyframeAnimation(keyPath: "transform.scale")
+      anim.duration       = plotScaleDuration
+      anim.cumulative     = false
+      anim.repeatCount    = Float.infinity
+      anim.values         = [plotMinScale, plotMaxScale, plotMinScale]
+      anim.timeOffset     = (plotScaleDuration / 4) * Double(i % 4)
+      anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
       plotLayer.addAnimation(anim, forKey: "plot.scale")
     }
     
