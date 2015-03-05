@@ -1,0 +1,466 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CE236EC51AA4FA6400811EAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE236EC41AA4FA6400811EAE /* AppDelegate.swift */; };
+		CE236EC71AA4FA6400811EAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE236EC61AA4FA6400811EAE /* ViewController.swift */; };
+		CE236ECA1AA4FA6400811EAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE236EC81AA4FA6400811EAE /* Main.storyboard */; };
+		CE236ECC1AA4FA6400811EAE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE236ECB1AA4FA6400811EAE /* Images.xcassets */; };
+		CE236ECF1AA4FA6400811EAE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE236ECD1AA4FA6400811EAE /* LaunchScreen.xib */; };
+		CE236EDB1AA4FA6400811EAE /* CocardeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE236EDA1AA4FA6400811EAE /* CocardeTests.swift */; };
+		CE236EE81AA4FC7C00811EAE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE236EE61AA4FC7C00811EAE /* UIColor.swift */; };
+		CEC3B4081AA868D700D33B9B /* CocardeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3B4071AA868D700D33B9B /* CocardeView.swift */; };
+		CEC3B40A1AA8B6C000D33B9B /* PieLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3B4091AA8B6C000D33B9B /* PieLayer.swift */; };
+		CEC3B40C1AA8C26F00D33B9B /* CocardeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3B40B1AA8C26F00D33B9B /* CocardeLayer.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE236ED51AA4FA6400811EAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE236EB71AA4FA6400811EAE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE236EBE1AA4FA6400811EAE;
+			remoteInfo = Cocarde;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CE236EBF1AA4FA6400811EAE /* Cocarde.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cocarde.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE236EC31AA4FA6400811EAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE236EC41AA4FA6400811EAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CE236EC61AA4FA6400811EAE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CE236EC91AA4FA6400811EAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CE236ECB1AA4FA6400811EAE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CE236ECE1AA4FA6400811EAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		CE236ED41AA4FA6400811EAE /* CocardeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocardeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE236ED91AA4FA6400811EAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE236EDA1AA4FA6400811EAE /* CocardeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocardeTests.swift; sourceTree = "<group>"; };
+		CE236EE61AA4FC7C00811EAE /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		CEC3B4071AA868D700D33B9B /* CocardeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocardeView.swift; sourceTree = "<group>"; };
+		CEC3B4091AA8B6C000D33B9B /* PieLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieLayer.swift; sourceTree = "<group>"; };
+		CEC3B40B1AA8C26F00D33B9B /* CocardeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocardeLayer.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE236EBC1AA4FA6400811EAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE236ED11AA4FA6400811EAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE236EB61AA4FA6400811EAE = {
+			isa = PBXGroup;
+			children = (
+				CE236EE41AA4FC7C00811EAE /* Cocarde */,
+				CE236EC11AA4FA6400811EAE /* Example */,
+				CE236ED71AA4FA6400811EAE /* CocardeTests */,
+				CE236EC01AA4FA6400811EAE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CE236EC01AA4FA6400811EAE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE236EBF1AA4FA6400811EAE /* Cocarde.app */,
+				CE236ED41AA4FA6400811EAE /* CocardeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE236EC11AA4FA6400811EAE /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				CE236EC41AA4FA6400811EAE /* AppDelegate.swift */,
+				CE236EC61AA4FA6400811EAE /* ViewController.swift */,
+				CE236EC81AA4FA6400811EAE /* Main.storyboard */,
+				CE236ECB1AA4FA6400811EAE /* Images.xcassets */,
+				CE236ECD1AA4FA6400811EAE /* LaunchScreen.xib */,
+				CE236EC21AA4FA6400811EAE /* Supporting Files */,
+			);
+			name = Example;
+			path = Cocarde;
+			sourceTree = "<group>";
+		};
+		CE236EC21AA4FA6400811EAE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE236EC31AA4FA6400811EAE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE236ED71AA4FA6400811EAE /* CocardeTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE236EDA1AA4FA6400811EAE /* CocardeTests.swift */,
+				CE236ED81AA4FA6400811EAE /* Supporting Files */,
+			);
+			path = CocardeTests;
+			sourceTree = "<group>";
+		};
+		CE236ED81AA4FA6400811EAE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE236ED91AA4FA6400811EAE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE236EE41AA4FC7C00811EAE /* Cocarde */ = {
+			isa = PBXGroup;
+			children = (
+				CEC3B4071AA868D700D33B9B /* CocardeView.swift */,
+				CEC3B40B1AA8C26F00D33B9B /* CocardeLayer.swift */,
+				CEC3B40D1AA8C87100D33B9B /* Utils */,
+				CEC3B40E1AA8C87C00D33B9B /* Layers */,
+			);
+			name = Cocarde;
+			path = ../Cocarde;
+			sourceTree = "<group>";
+		};
+		CEC3B40D1AA8C87100D33B9B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CE236EE61AA4FC7C00811EAE /* UIColor.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		CEC3B40E1AA8C87C00D33B9B /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				CEC3B4091AA8B6C000D33B9B /* PieLayer.swift */,
+			);
+			name = Layers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE236EBE1AA4FA6400811EAE /* Cocarde */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE236EDE1AA4FA6400811EAE /* Build configuration list for PBXNativeTarget "Cocarde" */;
+			buildPhases = (
+				CE236EBB1AA4FA6400811EAE /* Sources */,
+				CE236EBC1AA4FA6400811EAE /* Frameworks */,
+				CE236EBD1AA4FA6400811EAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cocarde;
+			productName = Cocarde;
+			productReference = CE236EBF1AA4FA6400811EAE /* Cocarde.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CE236ED31AA4FA6400811EAE /* CocardeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE236EE11AA4FA6400811EAE /* Build configuration list for PBXNativeTarget "CocardeTests" */;
+			buildPhases = (
+				CE236ED01AA4FA6400811EAE /* Sources */,
+				CE236ED11AA4FA6400811EAE /* Frameworks */,
+				CE236ED21AA4FA6400811EAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE236ED61AA4FA6400811EAE /* PBXTargetDependency */,
+			);
+			name = CocardeTests;
+			productName = CocardeTests;
+			productReference = CE236ED41AA4FA6400811EAE /* CocardeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE236EB71AA4FA6400811EAE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Yannick Loriot";
+				TargetAttributes = {
+					CE236EBE1AA4FA6400811EAE = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					CE236ED31AA4FA6400811EAE = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = CE236EBE1AA4FA6400811EAE;
+					};
+				};
+			};
+			buildConfigurationList = CE236EBA1AA4FA6400811EAE /* Build configuration list for PBXProject "Cocarde" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CE236EB61AA4FA6400811EAE;
+			productRefGroup = CE236EC01AA4FA6400811EAE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CE236EBE1AA4FA6400811EAE /* Cocarde */,
+				CE236ED31AA4FA6400811EAE /* CocardeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE236EBD1AA4FA6400811EAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE236ECA1AA4FA6400811EAE /* Main.storyboard in Resources */,
+				CE236ECF1AA4FA6400811EAE /* LaunchScreen.xib in Resources */,
+				CE236ECC1AA4FA6400811EAE /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE236ED21AA4FA6400811EAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE236EBB1AA4FA6400811EAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEC3B40A1AA8B6C000D33B9B /* PieLayer.swift in Sources */,
+				CE236EC71AA4FA6400811EAE /* ViewController.swift in Sources */,
+				CEC3B4081AA868D700D33B9B /* CocardeView.swift in Sources */,
+				CE236EE81AA4FC7C00811EAE /* UIColor.swift in Sources */,
+				CE236EC51AA4FA6400811EAE /* AppDelegate.swift in Sources */,
+				CEC3B40C1AA8C26F00D33B9B /* CocardeLayer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE236ED01AA4FA6400811EAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE236EDB1AA4FA6400811EAE /* CocardeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE236ED61AA4FA6400811EAE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE236EBE1AA4FA6400811EAE /* Cocarde */;
+			targetProxy = CE236ED51AA4FA6400811EAE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CE236EC81AA4FA6400811EAE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE236EC91AA4FA6400811EAE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CE236ECD1AA4FA6400811EAE /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE236ECE1AA4FA6400811EAE /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CE236EDC1AA4FA6400811EAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CE236EDD1AA4FA6400811EAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CE236EDF1AA4FA6400811EAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Cocarde/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CE236EE01AA4FA6400811EAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Cocarde/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		CE236EE21AA4FA6400811EAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CocardeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cocarde.app/Cocarde";
+			};
+			name = Debug;
+		};
+		CE236EE31AA4FA6400811EAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CocardeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cocarde.app/Cocarde";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE236EBA1AA4FA6400811EAE /* Build configuration list for PBXProject "Cocarde" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE236EDC1AA4FA6400811EAE /* Debug */,
+				CE236EDD1AA4FA6400811EAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE236EDE1AA4FA6400811EAE /* Build configuration list for PBXNativeTarget "Cocarde" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE236EDF1AA4FA6400811EAE /* Debug */,
+				CE236EE01AA4FA6400811EAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE236EE11AA4FA6400811EAE /* Build configuration list for PBXNativeTarget "CocardeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE236EE21AA4FA6400811EAE /* Debug */,
+				CE236EE31AA4FA6400811EAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE236EB71AA4FA6400811EAE /* Project object */;
+}
