@@ -28,33 +28,84 @@ import Foundation
 import UIKit
 import QuartzCore
 
+public enum CocardeStyle: Int {
+  case Default = 0
+  case Pie     = 1
+}
+
 @IBDesignable final public class CocardeView: UIView {
-  @IBInspectable public var lineWidth: CGFloat       = 28.0
-  @IBInspectable public var segmentCount: UInt       = 15
-  @IBInspectable public var rotationDuration: Double = 12
-  @IBInspectable public var colorsAsString: String   = ""
-  @IBInspectable public var hidesWhenStopped: Bool   = true
+  @IBInspectable public var segmentCount: UInt = 15 {
+    didSet {
+      updateCocadeLayer()
+    }
+  }
   
+  @IBInspectable public var loopDuration: Double = 12 {
+    didSet {
+      updateCocadeLayer()
+    }
+  }
+  
+  @IBInspectable public var colorsAsString: String = "" {
+    didSet {
+      updateCocadeLayer()
+    }
+  }
+  
+  @IBInspectable public var hidesWhenStopped: Bool = true {
+    didSet {
+      stopAnimating()
+    }
+  }
+  
+  @IBInspectable public var style: CocardeStyle = .Default {
+    didSet {
+      updateCocadeLayer()
+    }
+  }
+
   private var containerLayer: CocardeLayer?
   
   public var colors = [UIColor(hexString: "#DB5C65"), UIColor(hexString: "#A7405D"), UIColor(hexString: "#3B1C57"), UIColor(hexString: "#F59155"), UIColor(hexString: "#733633")]
   
   public override func layoutSubviews() {
     super.layoutSubviews()
-
-    if containerLayer == nil {
-      containerLayer = PieLayer(segmentCount: segmentCount, segmentColors: colors, rotationDuration: rotationDuration)
-      layer.addSublayer(containerLayer!)
-    }
     
     containerLayer?.frame = bounds
   }
   
+  public override func didMoveToSuperview() {
+    super.didMoveToSuperview()
+    
+    if containerLayer == nil {
+      containerLayer = layerWithStyle(style)
+      layer.addSublayer(containerLayer)
+    }
+  }
   public override func awakeFromNib() {
     super.awakeFromNib()
     
-    containerLayer = PieLayer(segmentCount: 18, segmentColors: colors, rotationDuration: rotationDuration)
-    layer.addSublayer(containerLayer!)
+    updateCocadeLayer()
+  }
+  
+  // MARK: - Updating the Layer
+  
+  private func updateCocadeLayer() {
+    if containerLayer != nil {
+      containerLayer?.removeFromSuperlayer()
+    }
+    
+    containerLayer = layerWithStyle(style)
+    layer.addSublayer(containerLayer)
+  }
+  
+  private func layerWithStyle(style: CocardeStyle) -> CocardeLayer {
+    switch(style) {
+    case .Pie:
+      return PieLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
+    default:
+      return DefaultLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
+    }
   }
   
   public func startAnimating() {

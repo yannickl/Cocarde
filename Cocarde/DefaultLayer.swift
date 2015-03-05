@@ -28,10 +28,9 @@ import Foundation
 import UIKit
 import QuartzCore
 
-final class PieLayer: CocardeLayer {
-  var plotScaleDuration: Double = 4.0
-  var plotMinScale: CGFloat     = 0.9
-  var plotMaxScale: CGFloat     = 1.2
+final class DefaultLayer: CocardeLayer {
+  var plotMinScale: CGFloat = 0.9
+  var plotMaxScale: CGFloat = 1.2
   
   required init(segmentCount segments: UInt, segmentColors colors: [UIColor], loopDuration duration: Double) {
     super.init(segmentCount: segments, segmentColors: colors, loopDuration: duration)
@@ -40,9 +39,9 @@ final class PieLayer: CocardeLayer {
   override init!(layer: AnyObject!) {
     super.init(layer: layer)
   }
-
+  
   required init(coder aDecoder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
+    fatalError("init(coder:) has not been implemented")
   }
   
   // MARK: - Drawing Cocarde Activity
@@ -50,18 +49,18 @@ final class PieLayer: CocardeLayer {
   override func drawInRect(rect: CGRect) {
     let center     = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect))
     let angle      = CGFloat(2 * M_PI / Double(segmentCount))
-    let radius     = (min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / 2) / plotMaxScale
     let colorCount = segmentColors.count
-
+    
+    let radius     = (min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / 2) / plotMaxScale / CGFloat(segmentCount)
+    let startAngle = CGFloat(0)
+    let endAngle   = CGFloat(2 * M_PI)
+    
     for i in 0 ..< segmentCount {
-      let startAngle = CGFloat(i) * angle
-      let endAngle   = startAngle + angle
-
+      let circleRadius = radius * CGFloat(i)
       let plotLayer = CAShapeLayer()
-      addSublayer(plotLayer)
+      insertSublayer(plotLayer, atIndex: 0)
       
       let plotPath = UIBezierPath()
-      plotPath.moveToPoint(CGPointZero)
       plotPath.addArcWithCenter(CGPointZero, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
       
       plotLayer.path      = plotPath.CGPath
@@ -69,26 +68,25 @@ final class PieLayer: CocardeLayer {
       plotLayer.position  = center
       plotLayer.speed     = 0
       
-      let anim         = CAKeyframeAnimation(keyPath: "transform.scale")
-      anim.duration    = plotScaleDuration
-      anim.cumulative  = false
-      anim.repeatCount = Float.infinity
-      anim.values      = [plotMinScale, plotMaxScale, plotMinScale]
-      anim.keyTimes    = [0, 0.5, 1.0]
-      anim.timeOffset  = (plotScaleDuration / 4) * Double(i % 4)
-      anim.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      var scaleValues: [CGFloat] = []
+      
+      for j in 0 ..< segmentCount {
+        if i == j {
+          scaleValues.append(plotMaxScale)
+        }
+        else {
+          scaleValues.append(0)
+        }
+      }
+      
+      let anim            = CAKeyframeAnimation(keyPath: "transform.scale")
+      anim.duration       = loopDuration
+      anim.cumulative     = false
+      anim.repeatCount    = Float.infinity
+      anim.values         = scaleValues
+      //anim.timeOffset     = (loopDuration / Double(segmentCount)) * Double(i)
+      anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
       plotLayer.addAnimation(anim, forKey: "plot.scale")
     }
-    
-    self.speed = 0
-    
-    let anim          = CABasicAnimation(keyPath:"transform.rotation.z")
-    anim.duration     = loopDuration
-    anim.fromValue    = 0
-    anim.toValue      = 2 * M_PI
-    anim.repeatCount  = Float.infinity
-    anim.autoreverses = false
-
-    addAnimation(anim, forKey: "self.rotation")
   }
 }

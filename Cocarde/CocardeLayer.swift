@@ -29,9 +29,12 @@ import UIKit
 import QuartzCore
 
 internal class CocardeLayer: CALayer {
+  private let hideAnimationKey   = "plots.hide"
+  private let revealAnimationKey = "plots.reveal"
+  
   let segmentCount: UInt
   let segmentColors: [UIColor]
-  let rotationDuration: Double
+  let loopDuration: Double
   
   override var frame: CGRect {
     didSet {
@@ -41,19 +44,19 @@ internal class CocardeLayer: CALayer {
     }
   }
   
-  required init(segmentCount segments: UInt, segmentColors colors: [UIColor], rotationDuration duration: Double) {
-    segmentCount     = segments
-    segmentColors    = colors
-    rotationDuration = duration
+  required init(segmentCount segments: UInt, segmentColors colors: [UIColor], loopDuration duration: Double) {
+    segmentCount  = segments
+    segmentColors = colors
+    loopDuration  = duration
     
     super.init()
   }
   
   override init!(layer: AnyObject!) {
     if layer is PieLayer {
-      segmentCount     = layer.segmentCount
-      segmentColors    = layer.segmentColors
-      rotationDuration = layer.rotationDuration
+      segmentCount  = layer.segmentCount
+      segmentColors = layer.segmentColors
+      loopDuration  = layer.loopDuration
     }
     else {
       fatalError("init(coder:) has not been implemented")
@@ -93,30 +96,51 @@ internal class CocardeLayer: CALayer {
   // MARK: - Managing Animations
   
   internal func startAnimating() {
-    let currentTime = CACurrentMediaTime()
-    
     if sublayers != nil {
       for layer in sublayers as [CALayer] {
-        layer.speed     = 1
-        layer.beginTime = layer.convertTime(currentTime, fromLayer: nil) - layer.timeOffset
+        layer.speed = 1
       }
     }
 
-    speed     = 1
-    beginTime = convertTime(currentTime, fromLayer: nil) - timeOffset
+    speed = 1
+    
+    if animationForKey(hideAnimationKey) != nil {
+      let anim            = CABasicAnimation(keyPath: "transform.scale")
+      anim.duration       = 0.4
+      anim.fromValue      = 0
+      anim.toValue        = 1
+      anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      
+      addAnimation(anim, forKey: revealAnimationKey)
+      removeAnimationForKey(hideAnimationKey)
+    }
   }
   
-  internal func stopAnimating(hidesWhenStopped: Bool) {
-    let currentTime = CACurrentMediaTime()
-    
-    if sublayers != nil {
-      for layer in sublayers as [CALayer] {
-        layer.timeOffset = layer.convertTime(currentTime, fromLayer: nil)
-        layer.speed      = 0
+  internal func stopAnimating(needsHide: Bool) {
+    if !needsHide {
+      let currentTime = CACurrentMediaTime()
+      
+      if sublayers != nil {
+        for layer in sublayers as [CALayer] {
+          layer.timeOffset = layer.convertTime(currentTime, fromLayer: nil)
+          layer.speed      = 0
+        }
       }
+      
+      timeOffset = convertTime(currentTime, fromLayer: nil)
+      speed      = 0
     }
-    
-    timeOffset = convertTime(currentTime, fromLayer: nil)
-    speed      = 0
+    else {
+      speed = 1
+      
+      let anim                 = CABasicAnimation(keyPath: "transform.scale")
+      anim.duration            = 0.4
+      anim.toValue             = 0
+      anim.removedOnCompletion = false
+      anim.fillMode            = kCAFillModeForwards
+      anim.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      
+      addAnimation(anim, forKey: hideAnimationKey)
+    }
   }
 }
