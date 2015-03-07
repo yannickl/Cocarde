@@ -18,6 +18,7 @@
 		CEC3B40A1AA8B6C000D33B9B /* PieLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3B4091AA8B6C000D33B9B /* PieLayer.swift */; };
 		CEC3B40C1AA8C26F00D33B9B /* CocardeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3B40B1AA8C26F00D33B9B /* CocardeLayer.swift */; };
 		CEC3B4101AA8DE6800D33B9B /* DefaultLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3B40F1AA8DE6800D33B9B /* DefaultLayer.swift */; };
+		CEC3B4421AAB8B8600D33B9B /* EqualizerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3B4411AAB8B8600D33B9B /* EqualizerLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		CEC3B4091AA8B6C000D33B9B /* PieLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieLayer.swift; sourceTree = "<group>"; };
 		CEC3B40B1AA8C26F00D33B9B /* CocardeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocardeLayer.swift; sourceTree = "<group>"; };
 		CEC3B40F1AA8DE6800D33B9B /* DefaultLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLayer.swift; sourceTree = "<group>"; };
+		CEC3B4411AAB8B8600D33B9B /* EqualizerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualizerLayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			children = (
 				CEC3B40F1AA8DE6800D33B9B /* DefaultLayer.swift */,
 				CEC3B4091AA8B6C000D33B9B /* PieLayer.swift */,
+				CEC3B4411AAB8B8600D33B9B /* EqualizerLayer.swift */,
 			);
 			name = Layers;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				CE236EE81AA4FC7C00811EAE /* UIColor.swift in Sources */,
 				CE236EC51AA4FA6400811EAE /* AppDelegate.swift in Sources */,
 				CEC3B4101AA8DE6800D33B9B /* DefaultLayer.swift in Sources */,
+				CEC3B4421AAB8B8600D33B9B /* EqualizerLayer.swift in Sources */,
 				CEC3B40C1AA8C26F00D33B9B /* CocardeLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

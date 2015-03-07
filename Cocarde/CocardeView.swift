@@ -1,36 +1,37 @@
 /*
- * Cocarde
- *
- * Copyright 2015-present Yannick Loriot.
- * http://yannickloriot.com
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
+* Cocarde
+*
+* Copyright 2015-present Yannick Loriot.
+* http://yannickloriot.com
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*
+*/
 
 import Foundation
 import UIKit
 import QuartzCore
 
 public enum CocardeStyle: Int {
-  case Default = 0
-  case Pie     = 1
+  case Default   = 0
+  case Pie       = 1
+  case Equalizer = 2
 }
 
 @IBDesignable final public class CocardeView: UIView {
@@ -64,12 +65,12 @@ public enum CocardeStyle: Int {
     }
   }
   
-  @IBInspectable public var style: CocardeStyle = .Pie {
+  @IBInspectable public var style: CocardeStyle = .Equalizer {
     didSet {
       updateCocadeLayer()
     }
   }
-
+  
   private var containerLayer: CocardeLayer?
   
   public var colors = [UIColor(hexString: "#DB5C65"), UIColor(hexString: "#A7405D"), UIColor(hexString: "#3B1C57"), UIColor(hexString: "#F59155"), UIColor(hexString: "#733633")]
@@ -113,6 +114,8 @@ public enum CocardeStyle: Int {
     switch(style) {
     case .Pie:
       return PieLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
+    case .Equalizer:
+      return EqualizerLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
     default:
       return DefaultLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
     }

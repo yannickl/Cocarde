@@ -36,6 +36,12 @@ internal class CocardeLayer: CALayer {
   let segmentColors: [UIColor]
   let loopDuration: Double
   
+  internal var hideAnimationDefaultKeyPath: String {
+    get {
+      return "transform.scale"
+    }
+  }
+  
   var animating: Bool = false {
     didSet {
       if animating {
@@ -127,7 +133,7 @@ internal class CocardeLayer: CALayer {
     speed = 1
     
     if animationForKey(hideAnimationKey) != nil {
-      let anim            = CABasicAnimation(keyPath: "transform.scale")
+      let anim            = CABasicAnimation(keyPath: hideAnimationDefaultKeyPath)
       anim.duration       = 0.4
       anim.fromValue      = 0
       anim.toValue        = 1
@@ -155,7 +161,7 @@ internal class CocardeLayer: CALayer {
     else {
       speed = 1
       
-      let anim                 = CABasicAnimation(keyPath: "transform.scale")
+      let anim                 = CABasicAnimation(keyPath: hideAnimationDefaultKeyPath)
       anim.duration            = animated ? 0.4 : 0.01
       anim.toValue             = 0
       anim.removedOnCompletion = false
