@@ -52,13 +52,19 @@ public enum CocardeStyle: Int {
     }
   }
   
-  @IBInspectable public var hidesWhenStopped: Bool = true {
+  @IBInspectable public var animating: Bool = false {
     didSet {
-      stopAnimating()
+      containerLayer?.animating = animating
     }
   }
   
-  @IBInspectable public var style: CocardeStyle = .Default {
+  @IBInspectable public var hidesWhenStopped: Bool = false {
+    didSet {
+      containerLayer?.hidesWhenStopped = hidesWhenStopped
+    }
+  }
+  
+  @IBInspectable public var style: CocardeStyle = .Pie {
     didSet {
       updateCocadeLayer()
     }
@@ -78,7 +84,9 @@ public enum CocardeStyle: Int {
     super.didMoveToSuperview()
     
     if containerLayer == nil {
-      containerLayer = layerWithStyle(style)
+      containerLayer                   = layerWithStyle(style)
+      containerLayer?.hidesWhenStopped = hidesWhenStopped
+      containerLayer?.animating        = animating
       layer.addSublayer(containerLayer)
     }
   }
@@ -95,7 +103,9 @@ public enum CocardeStyle: Int {
       containerLayer?.removeFromSuperlayer()
     }
     
-    containerLayer = layerWithStyle(style)
+    containerLayer                   = layerWithStyle(style)
+    containerLayer?.hidesWhenStopped = hidesWhenStopped
+    containerLayer?.animating        = animating
     layer.addSublayer(containerLayer)
   }
   
@@ -109,22 +119,14 @@ public enum CocardeStyle: Int {
   }
   
   public func startAnimating() {
-    containerLayer?.startAnimating()
+    containerLayer?.animating = true
   }
   
   public func stopAnimating() {
-    containerLayer?.stopAnimating(hidesWhenStopped)
+    containerLayer?.animating = false
   }
   
-  private var stopped: Bool = true
   public override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-    if stopped {
-      startAnimating()
-    }
-    else {
-      stopAnimating()
-    }
-    
-    stopped = !stopped
+    containerLayer?.animating = !containerLayer!.animating
   }
 }

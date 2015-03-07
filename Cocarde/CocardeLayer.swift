@@ -1,28 +1,28 @@
 /*
-* Cocarde
-*
-* Copyright 2015-present Yannick Loriot.
-* http://yannickloriot.com
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included in
-* all copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-* THE SOFTWARE.
-*
-*/
+ * Cocarde
+ *
+ * Copyright 2015-present Yannick Loriot.
+ * http://yannickloriot.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ */
 
 import Foundation
 import UIKit
@@ -36,11 +36,32 @@ internal class CocardeLayer: CALayer {
   let segmentColors: [UIColor]
   let loopDuration: Double
   
+  var animating: Bool = false {
+    didSet {
+      if animating {
+        startAnimating()
+      }
+      else {
+        stopAnimating(true)
+      }
+    }
+  }
+  
+  var hidesWhenStopped: Bool = false {
+    didSet {
+      stopAnimating(true)
+    }
+  }
+  
   override var frame: CGRect {
     didSet {
       clearDrawing()
       
       drawInRect(bounds)
+      
+      if !animating {
+        stopAnimating(false)
+      }
     }
   }
   
@@ -53,13 +74,15 @@ internal class CocardeLayer: CALayer {
   }
   
   override init!(layer: AnyObject!) {
-    if layer is PieLayer {
-      segmentCount  = layer.segmentCount
-      segmentColors = layer.segmentColors
-      loopDuration  = layer.loopDuration
+    if layer is CocardeLayer {
+      segmentCount     = layer.segmentCount
+      segmentColors    = layer.segmentColors
+      loopDuration     = layer.loopDuration
+      hidesWhenStopped = layer.hidesWhenStopped
+      animating        = layer.animating
     }
     else {
-      fatalError("init(coder:) has not been implemented")
+      fatalError("init(layer:) has not been implemented")
     }
     
     super.init(layer: layer)
@@ -90,7 +113,6 @@ internal class CocardeLayer: CALayer {
   }
   
   internal func drawInRect(rect: CGRect) {
-    
   }
   
   // MARK: - Managing Animations
@@ -116,8 +138,8 @@ internal class CocardeLayer: CALayer {
     }
   }
   
-  internal func stopAnimating(needsHide: Bool) {
-    if !needsHide {
+  internal func stopAnimating(animated: Bool) {
+    if !hidesWhenStopped {
       let currentTime = CACurrentMediaTime()
       
       if sublayers != nil {
@@ -134,12 +156,12 @@ internal class CocardeLayer: CALayer {
       speed = 1
       
       let anim                 = CABasicAnimation(keyPath: "transform.scale")
-      anim.duration            = 0.4
+      anim.duration            = animated ? 0.4 : 0.01
       anim.toValue             = 0
       anim.removedOnCompletion = false
-      anim.fillMode            = kCAFillModeForwards
+      anim.fillMode            = kCAFillModeBoth
       anim.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-      
+ 
       addAnimation(anim, forKey: hideAnimationKey)
     }
   }
