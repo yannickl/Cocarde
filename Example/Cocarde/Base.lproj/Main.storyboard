@@ -25,8 +25,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hidesWhenStopped" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="loopDuration">
-                                        <real key="value" value="6"/>
+                                        <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="animating" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>

@@ -65,7 +65,7 @@ public enum CocardeStyle: Int {
     }
   }
   
-  @IBInspectable public var style: CocardeStyle = .Equalizer {
+  @IBInspectable public var style: CocardeStyle = .Default {
     didSet {
       updateCocadeLayer()
     }
@@ -121,15 +121,17 @@ public enum CocardeStyle: Int {
     }
   }
   
-  public func startAnimating() {
-    containerLayer?.animating = true
-  }
-  
-  public func stopAnimating() {
-    containerLayer?.animating = false
-  }
-  
+  var styleNumber: Int = 0
   public override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-    containerLayer?.animating = !containerLayer!.animating
+    styleNumber = (styleNumber + 1) % 3
+    
+    if styleNumber == 0 {
+      loopDuration = 20
+    }
+    else {
+      loopDuration = 12
+    }
+    
+    style = CocardeStyle(rawValue: styleNumber)!
   }
 }

@@ -66,7 +66,6 @@ final class DefaultLayer: CocardeLayer {
       plotLayer.path      = plotPath.CGPath
       plotLayer.fillColor = segmentColors[Int(i) % colorCount].CGColor
       plotLayer.position  = center
-      plotLayer.speed     = 0
       
       let group = CAAnimationGroup()
       
