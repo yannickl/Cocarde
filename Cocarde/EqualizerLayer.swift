@@ -28,7 +28,7 @@ import Foundation
 import UIKit
 import QuartzCore
 
-final class EqualizerLayer: CocardeLayer {
+internal final class EqualizerLayer: CocardeLayer {
   override var hideAnimationDefaultKeyPath: String {
     get {
       return "transform.scale.y"
@@ -89,13 +89,14 @@ final class EqualizerLayer: CocardeLayer {
       plotLayer.strokeColor = plotLayer.fillColor
       plotLayer.position    = center
       
-      let anim            = CAKeyframeAnimation(keyPath: "transform.scale.y")
-      anim.duration       = loopDuration
-      anim.cumulative     = false
-      anim.repeatCount    = Float.infinity
-      anim.values         = values
-      anim.timeOffset     = loopDuration - (loopDuration / CFTimeInterval(segmentCount) * CFTimeInterval(i))
-      anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      let anim                 = CAKeyframeAnimation(keyPath: "transform.scale.y")
+      anim.duration            = loopDuration
+      anim.cumulative          = false
+      anim.repeatCount         = Float.infinity
+      anim.values              = values
+      anim.timeOffset          = loopDuration - (loopDuration / CFTimeInterval(segmentCount) * CFTimeInterval(i))
+      anim.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      anim.removedOnCompletion = false
       plotLayer.addAnimation(anim, forKey: "plot.scale")
     }
   }

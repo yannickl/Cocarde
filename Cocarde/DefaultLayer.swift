@@ -28,7 +28,7 @@ import Foundation
 import UIKit
 import QuartzCore
 
-final class DefaultLayer: CocardeLayer {
+internal final class DefaultLayer: CocardeLayer {
   var plotMinScale: CGFloat = 0.9
   var plotMaxScale: CGFloat = 1.2
   
@@ -96,18 +96,18 @@ final class DefaultLayer: CocardeLayer {
       scaleAnim.duration    = loopDuration
       scaleAnim.cumulative  = false
       scaleAnim.values      = scaleValues
+
+      let fadeAnim        = CAKeyframeAnimation(keyPath: "opacity")
+      fadeAnim.duration   = loopDuration
+      fadeAnim.cumulative = false
+      fadeAnim.values     = fadeValues
+      fadeAnim.fillMode   = kCAFillModeForwards
       
-      let fadeAnim                 = CAKeyframeAnimation(keyPath: "opacity")
-      fadeAnim.duration            = loopDuration
-      fadeAnim.cumulative          = false
-      fadeAnim.values              = fadeValues
-      fadeAnim.removedOnCompletion = false
-      fadeAnim.fillMode            = kCAFillModeForwards
-      
-      group.animations  = [scaleAnim, fadeAnim]
-      group.duration    = loopDuration
-      group.repeatCount = Float.infinity
-      group.autoreverses = true
+      group.animations          = [scaleAnim, fadeAnim]
+      group.duration            = loopDuration
+      group.repeatCount         = Float.infinity
+      group.autoreverses        = true
+      group.removedOnCompletion = false
       
       plotLayer.addAnimation(group, forKey: "circle.group")
     }

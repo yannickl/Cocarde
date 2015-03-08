@@ -27,7 +27,10 @@
 import Foundation
 import UIKit
 
-extension UIColor {
+/**
+  Convenient extension to create colors from hex strings.
+*/
+internal extension UIColor {
   convenience init(hexString:String) {
     let hexString = hexString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
     let scanner            = NSScanner(string: hexString)

@@ -28,6 +28,9 @@ import Foundation
 import UIKit
 import QuartzCore
 
+/**
+  Abstract class
+*/
 internal class CocardeLayer: CALayer {
   private let hideAnimationKey   = "plots.hide"
   private let revealAnimationKey = "plots.reveal"
@@ -71,6 +74,13 @@ internal class CocardeLayer: CALayer {
     }
   }
   
+  /**
+    Initializes a layer with parameters
+  
+    :param: segmentCount  Generic parameters display
+    :param: segmentColors Color list
+    :param: loopDuration  Duration in second for the loop animation
+  */
   required init(segmentCount segments: UInt, segmentColors colors: [UIColor], loopDuration duration: Double) {
     segmentCount  = segments
     segmentColors = colors

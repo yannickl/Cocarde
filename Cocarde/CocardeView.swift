@@ -28,13 +28,22 @@ import Foundation
 import UIKit
 import QuartzCore
 
+/**
+  Cocarde style
+*/
 public enum CocardeStyle: Int {
+  /// Default style
   case Default   = 0
+  /// Pie style
   case Pie       = 1
+  // Equalizer style
   case Equalizer = 2
 }
 
-@IBDesignable final public class CocardeView: UIView {
+/**
+  Cocarde view
+*/
+@IBDesignable public final class CocardeView: UIView {
   @IBInspectable public var segmentCount: UInt = 15 {
     didSet {
       updateCocadeLayer()

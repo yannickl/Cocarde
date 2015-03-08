@@ -28,7 +28,7 @@ import Foundation
 import UIKit
 import QuartzCore
 
-final class PieLayer: CocardeLayer {
+internal final class PieLayer: CocardeLayer {
   var plotScaleDuration: Double = 4.0
   var plotMinScale: CGFloat     = 0.9
   var plotMaxScale: CGFloat     = 1.2
@@ -69,22 +69,24 @@ final class PieLayer: CocardeLayer {
       plotLayer.strokeColor = plotLayer.fillColor
       plotLayer.position    = center
       
-      let anim            = CAKeyframeAnimation(keyPath: "transform.scale")
-      anim.duration       = plotScaleDuration
-      anim.cumulative     = false
-      anim.repeatCount    = Float.infinity
-      anim.values         = [plotMinScale, plotMaxScale, plotMinScale]
-      anim.timeOffset     = (plotScaleDuration / 4) * Double(i % 4)
-      anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      let anim                 = CAKeyframeAnimation(keyPath: "transform.scale")
+      anim.duration            = plotScaleDuration
+      anim.cumulative          = false
+      anim.repeatCount         = Float.infinity
+      anim.values              = [plotMinScale, plotMaxScale, plotMinScale]
+      anim.timeOffset          = (plotScaleDuration / 4) * Double(i % 4)
+      anim.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      anim.removedOnCompletion = false
       plotLayer.addAnimation(anim, forKey: "plot.scale")
     }
     
-    let anim          = CABasicAnimation(keyPath:"transform.rotation.z")
-    anim.duration     = loopDuration
-    anim.fromValue    = 0
-    anim.toValue      = 2 * M_PI
-    anim.repeatCount  = Float.infinity
-    anim.autoreverses = false
+    let anim                 = CABasicAnimation(keyPath:"transform.rotation.z")
+    anim.duration            = loopDuration
+    anim.fromValue           = 0
+    anim.toValue             = 2 * M_PI
+    anim.repeatCount         = Float.infinity
+    anim.autoreverses        = false
+    anim.removedOnCompletion = false
 
     addAnimation(anim, forKey: "self.rotation")
   }
