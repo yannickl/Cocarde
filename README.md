@@ -1,6 +1,5 @@
 ![Cocarde.swift](http://yannickloriot.com/resources/cocarde-logo.png)
 
-
 ![screenshot](http://yannickloriot.com/resources/cocarde.gif)
 
 ### Installation
