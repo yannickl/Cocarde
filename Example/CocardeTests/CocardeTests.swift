@@ -2,7 +2,7 @@
 //  CocardeTests.swift
 //  CocardeTests
 //
-//  Created by Yannick Loriot on 02/03/15.
+//  Created by Yannick Loriot on 13/03/15.
 //  Copyright (c) 2015 Yannick Loriot. All rights reserved.
 //
 

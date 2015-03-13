@@ -30,14 +30,35 @@ import QuartzCore
 
 /**
   Cocarde style
+
+  - Default:
+  - Pie:
+  - Equalizer:
 */
-public enum CocardeStyle: Int {
+public enum CocardeStyle: Int, Printable {
   /// Default style
   case Default   = 0
   /// Pie style
   case Pie       = 1
   // Equalizer style
   case Equalizer = 2
+  
+  /// A list including all values
+  static let allValues = [Default, Pie, Equalizer]
+  
+  /// A textual representation of the style
+  public var description : String {
+    get {
+      switch(self) {
+      case Default:
+        return "Default"
+      case Pie:
+        return "Pie"
+      case Equalizer:
+        return "Equalizer"
+      }
+    }
+  }
 }
 
 /**
@@ -102,7 +123,7 @@ public enum CocardeStyle: Int {
   }
   public override func awakeFromNib() {
     super.awakeFromNib()
-    
+
     updateCocadeLayer()
   }
   
@@ -128,19 +149,5 @@ public enum CocardeStyle: Int {
     default:
       return DefaultLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
     }
-  }
-  
-  var styleNumber: Int = 0
-  public override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-    styleNumber = (styleNumber + 1) % 3
-    
-    if styleNumber == 0 {
-      loopDuration = 20
-    }
-    else {
-      loopDuration = 12
-    }
-    
-    style = CocardeStyle(rawValue: styleNumber)!
   }
 }
