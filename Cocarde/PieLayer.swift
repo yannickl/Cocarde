@@ -30,8 +30,7 @@ import QuartzCore
 
 internal final class PieLayer: CocardeLayer {
   var plotScaleDuration: Double = 4.0
-  var plotMinScale: CGFloat     = 0.9
-  var plotMaxScale: CGFloat     = 1.2
+  var plotMinScale: CGFloat     = 0.7
   
   required init(segmentCount segments: UInt, segmentColors colors: [UIColor], loopDuration duration: Double) {
     super.init(segmentCount: segments, segmentColors: colors, loopDuration: duration)
@@ -50,7 +49,7 @@ internal final class PieLayer: CocardeLayer {
   override func drawInRect(rect: CGRect) {
     let center     = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect))
     let angle      = CGFloat(2 * M_PI / Double(segmentCount))
-    let radius     = (min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / 2) / plotMaxScale
+    let radius     = min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / 2
     let colorCount = segmentColors.count
 
     for i in 0 ..< segmentCount {
@@ -73,7 +72,7 @@ internal final class PieLayer: CocardeLayer {
       anim.duration            = plotScaleDuration
       anim.cumulative          = false
       anim.repeatCount         = Float.infinity
-      anim.values              = [plotMinScale, plotMaxScale, plotMinScale]
+      anim.values              = [plotMinScale, 1, plotMinScale]
       anim.timeOffset          = (plotScaleDuration / 4) * Double(i % 4)
       anim.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
       anim.removedOnCompletion = false

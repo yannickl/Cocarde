@@ -31,13 +31,12 @@ import QuartzCore
 internal final class ActivityIndicatorLayer: CocardeLayer {
   override var hideAnimationDefaultKeyPath: String {
     get {
-      return "transform.scale.y"
+      return "opacity"
     }
   }
   
-  var plotMinFade: CGFloat  = 0.3
-  var plotMaxFade: CGFloat  = 1.0
-  var centerRadius: CGFloat = 50
+  var plotMinFade: CGFloat = 0.1
+  var plotMaxFade: CGFloat = 1.0
   
   required init(segmentCount segments: UInt, segmentColors colors: [UIColor], loopDuration duration: Double) {
     super.init(segmentCount: segments, segmentColors: colors, loopDuration: duration)
@@ -58,8 +57,9 @@ internal final class ActivityIndicatorLayer: CocardeLayer {
     let angle      = CGFloat(2 * M_PI / Double(segmentCount))
     let colorCount = segmentColors.count
     
-    let plotHeight = min(CGRectGetWidth(rect), CGRectGetHeight(rect))
-    let plotWidth  = plotHeight / CGFloat(segmentCount)
+    let plotHeight   = min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / 2
+    let plotWidth    = plotHeight / CGFloat(segmentCount)
+    let centerRadius = plotHeight / 2.5
     
     for i in 0 ..< segmentCount {
       let plotLayer = CAShapeLayer()

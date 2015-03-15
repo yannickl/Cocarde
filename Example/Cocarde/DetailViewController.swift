@@ -10,6 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
   @IBOutlet weak var cocardeView: CocardeView!
+  @IBOutlet weak var toggleStartButton: UIButton!
   
   var cocardeStyle: CocardeStyle? {
     didSet {
@@ -22,9 +23,10 @@ class DetailViewController: UIViewController {
   func configureView() {
     // Update the user interface for the detail item.
     if let style = self.cocardeStyle {
-      title                 = style.description
-      cocardeView.style     = style
-      cocardeView.animating = true
+      title                        = style.description
+      cocardeView.style            = style
+      cocardeView.animating        = true
+      cocardeView.hidesWhenStopped = true
       
       switch style {
       case .Default:
@@ -51,6 +53,14 @@ class DetailViewController: UIViewController {
     super.viewDidLoad()
     
     self.configureView()
+  }
+  
+  // MARK: - Actions
+  
+  @IBAction func toggleStartAction(sender: AnyObject) {
+    cocardeView.animating = !cocardeView.animating
+    
+    toggleStartButton.setTitle(cocardeView.animating ? "Stop" : "Start", forState: .Normal)
   }
 }
 

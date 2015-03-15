@@ -32,7 +32,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Dx-Wq-ouY" customClass="CocardeView" customModule="Cocarde" customModuleProvider="target">
-                                <rect key="frame" x="100" y="164" width="400" height="336"/>
+                                <rect key="frame" x="100" y="164" width="400" height="351"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="segmentCount">
@@ -43,19 +43,31 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UK-vp-RI7">
+                                <rect key="frame" x="284" y="550" width="33" height="30"/>
+                                <state key="normal" title="Stop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleStartAction:" destination="JEX-9P-axG" eventType="touchUpInside" id="xb9-hz-Dsd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="6Dx-Wq-ouY" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" constant="100" id="7Nf-YO-wKY"/>
+                            <constraint firstItem="6Dx-Wq-ouY" firstAttribute="centerX" secondItem="9UK-vp-RI7" secondAttribute="centerX" constant="-0.5" id="87v-FM-7xY"/>
+                            <constraint firstItem="9UK-vp-RI7" firstAttribute="top" secondItem="6Dx-Wq-ouY" secondAttribute="bottom" constant="35" id="Fwt-C2-fVe"/>
                             <constraint firstAttribute="trailing" secondItem="6Dx-Wq-ouY" secondAttribute="trailing" constant="100" id="PyB-Mm-q8v"/>
-                            <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="6Dx-Wq-ouY" secondAttribute="bottom" constant="100" id="QFv-jw-9dH"/>
                             <constraint firstItem="6Dx-Wq-ouY" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="100" id="aSy-38-Ql2"/>
+                            <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="9UK-vp-RI7" secondAttribute="bottom" constant="20" id="fi9-dz-a2K"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="None" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="cocardeView" destination="6Dx-Wq-ouY" id="FZu-nP-Aeh"/>
+                        <outlet property="toggleStartButton" destination="9UK-vp-RI7" id="xAZ-1Z-Qdc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
