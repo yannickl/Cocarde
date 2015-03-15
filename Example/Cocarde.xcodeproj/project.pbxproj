@@ -20,6 +20,7 @@
 		CEF7C1AC1AB379E500C046D2 /* EqualizerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF7C1A61AB379E500C046D2 /* EqualizerLayer.swift */; };
 		CEF7C1AD1AB379E500C046D2 /* PieLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF7C1A71AB379E500C046D2 /* PieLayer.swift */; };
 		CEF7C1AE1AB379E500C046D2 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF7C1A81AB379E500C046D2 /* UIColor.swift */; };
+		CEF7C1B01AB61F5900C046D2 /* ActivityIndicatorLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF7C1AF1AB61F5900C046D2 /* ActivityIndicatorLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		CEF7C1A61AB379E500C046D2 /* EqualizerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualizerLayer.swift; sourceTree = "<group>"; };
 		CEF7C1A71AB379E500C046D2 /* PieLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieLayer.swift; sourceTree = "<group>"; };
 		CEF7C1A81AB379E500C046D2 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		CEF7C1AF1AB61F5900C046D2 /* ActivityIndicatorLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorLayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,15 +133,24 @@
 		CEF7C1A21AB379E500C046D2 /* Cocarde */ = {
 			isa = PBXGroup;
 			children = (
+				CEF7C1B11AB61F8A00C046D2 /* Layers */,
 				CEF7C1A31AB379E500C046D2 /* CocardeLayer.swift */,
 				CEF7C1A41AB379E500C046D2 /* CocardeView.swift */,
-				CEF7C1A51AB379E500C046D2 /* DefaultLayer.swift */,
-				CEF7C1A61AB379E500C046D2 /* EqualizerLayer.swift */,
-				CEF7C1A71AB379E500C046D2 /* PieLayer.swift */,
 				CEF7C1A81AB379E500C046D2 /* UIColor.swift */,
 			);
 			name = Cocarde;
 			path = ../Cocarde;
+			sourceTree = "<group>";
+		};
+		CEF7C1B11AB61F8A00C046D2 /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				CEF7C1AF1AB61F5900C046D2 /* ActivityIndicatorLayer.swift */,
+				CEF7C1A51AB379E500C046D2 /* DefaultLayer.swift */,
+				CEF7C1A61AB379E500C046D2 /* EqualizerLayer.swift */,
+				CEF7C1A71AB379E500C046D2 /* PieLayer.swift */,
+			);
+			name = Layers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +255,7 @@
 			files = (
 				CEF7C1851AB3791500C046D2 /* DetailViewController.swift in Sources */,
 				CEF7C1AB1AB379E500C046D2 /* DefaultLayer.swift in Sources */,
+				CEF7C1B01AB61F5900C046D2 /* ActivityIndicatorLayer.swift in Sources */,
 				CEF7C1831AB3791500C046D2 /* MasterViewController.swift in Sources */,
 				CEF7C1AC1AB379E500C046D2 /* EqualizerLayer.swift in Sources */,
 				CEF7C1AE1AB379E500C046D2 /* UIColor.swift in Sources */,

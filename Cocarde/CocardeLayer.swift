@@ -56,6 +56,10 @@ internal class CocardeLayer: CALayer {
     }
   }
   
+  /**
+    A Boolean value that controls whether the receiver is hidden when the
+    animation is stopped.
+  */
   var hidesWhenStopped: Bool = false {
     didSet {
       stopAnimating(true)

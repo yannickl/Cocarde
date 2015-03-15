@@ -39,6 +39,10 @@ class DetailViewController: UIViewController {
         cocardeView.colors       = [UIColor(hex: 0x2ecc71), UIColor(hex: 0x3498db), UIColor(hex: 0x9b59b6), UIColor(hex: 0xe67e22), UIColor(hex: 0xc0392b), UIColor(hex: 0xe74c3c), UIColor(hex: 0xe74c8c)]
         cocardeView.loopDuration = 4
         cocardeView.segmentCount = 14
+      case .ActivityIndicator:
+        cocardeView.colors       = [UIColor(hex: 0x3bb3d4), UIColor(hex: 0xf29830), UIColor(hex: 0x44c8b8), UIColor(hex: 0xf86530), UIColor(hex: 0x4d4165)]
+        cocardeView.loopDuration = 3
+        cocardeView.segmentCount = 16
       }
     }
   }

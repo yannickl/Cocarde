@@ -31,20 +31,23 @@ import QuartzCore
 /**
   The visual style of the cocarde view.
 
-  - Default:
-  - Pie: 
-  - Equalizer:
+  - Default: A cocarde indicator style
+  - Pie: A pie chart indicator style
+  - Equalizer: A view meter indicator style
+  - ActivityIndicator: An activity indicator style like
 */
 public enum CocardeStyle: Int, Printable {
   /// Default style
-  case Default   = 0
+  case Default = 0
   /// Pie style
-  case Pie       = 1
+  case Pie = 1
   // Equalizer style
   case Equalizer = 2
+  // Activity Indicator style
+  case ActivityIndicator = 3
   
   /// A list including all values
-  static let allValues = [Default, Pie, Equalizer]
+  static let allValues = [Default, Pie, Equalizer, ActivityIndicator]
   
   /// A textual representation of the style
   public var description : String {
@@ -56,6 +59,8 @@ public enum CocardeStyle: Int, Printable {
         return "Pie"
       case Equalizer:
         return "Equalizer"
+      case ActivityIndicator:
+        return "ActivityIndicator"
       }
     }
   }
@@ -64,6 +69,8 @@ public enum CocardeStyle: Int, Printable {
 /**
   Use a cocarde view to show that a task is in progress with custom
   representations in order to replace the UIActivityIndicatorView.
+
+  Its main purpose is to provided colorful activity indicator.
 
   You control when a cocarde animates by calling the startAnimating and 
   stopAnimating methods. To automatically hide the cocarde when animation
@@ -112,7 +119,7 @@ public enum CocardeStyle: Int, Printable {
   private var containerLayer: CocardeLayer?
   
   /// The colors used by the cocarde view.
-  public var colors = [UIColor(hex: 0x3498db)]
+  public var colors = [UIColor(hex: 0x3498db), UIColor(hex: 0xecf0f1), UIColor(hex: 0xe74c3c)]
   
   public override func layoutSubviews() {
     super.layoutSubviews()
@@ -130,6 +137,7 @@ public enum CocardeStyle: Int, Printable {
       layer.addSublayer(containerLayer)
     }
   }
+  
   public override func awakeFromNib() {
     super.awakeFromNib()
 
@@ -171,6 +179,8 @@ public enum CocardeStyle: Int, Printable {
       return PieLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
     case .Equalizer:
       return EqualizerLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
+    case .ActivityIndicator:
+      return ActivityIndicatorLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
     default:
       return DefaultLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
     }

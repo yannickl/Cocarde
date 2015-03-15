@@ -28,16 +28,16 @@ import Foundation
 import UIKit
 import QuartzCore
 
-internal final class EqualizerLayer: CocardeLayer {
+internal final class ActivityIndicatorLayer: CocardeLayer {
   override var hideAnimationDefaultKeyPath: String {
     get {
       return "transform.scale.y"
     }
   }
   
-  var plotMinScale: CGFloat = 0.4
-  var plotMaxScale: CGFloat = 1.0
-  var plotGapSize: CGFloat  = 10
+  var plotMinFade: CGFloat  = 0.3
+  var plotMaxFade: CGFloat  = 1.0
+  var centerRadius: CGFloat = 50
   
   required init(segmentCount segments: UInt, segmentColors colors: [UIColor], loopDuration duration: Double) {
     super.init(segmentCount: segments, segmentColors: colors, loopDuration: duration)
@@ -58,47 +58,32 @@ internal final class EqualizerLayer: CocardeLayer {
     let angle      = CGFloat(2 * M_PI / Double(segmentCount))
     let colorCount = segmentColors.count
     
-    let plotHeight = min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / plotMaxScale
-    let plotWidth  = CGRectGetWidth(rect) / CGFloat(segmentCount)
-    
-    // Prepare plot scale values
-    var values: [CGFloat] = []
-    
-    for i in 0 ..< segmentCount {
-      var plotScale: CGFloat = 0
-      
-      if i < segmentCount / 2 {
-        plotScale = (plotMaxScale - plotMinScale) * CGFloat(sin(M_PI / Double(segmentCount / 2) * Double(i)))
-      }
-      
-      values.append(plotMinScale + plotScale)
-    }
-    
-    for i in 0 ..< 2 {
-      values.insert(plotMinScale, atIndex: 0)
-      values.append(plotMinScale)
-    }
+    let plotHeight = min(CGRectGetWidth(rect), CGRectGetHeight(rect))
+    let plotWidth  = plotHeight / CGFloat(segmentCount)
     
     for i in 0 ..< segmentCount {
       let plotLayer = CAShapeLayer()
       addSublayer(plotLayer)
       
-      let plotRect = CGRectMake(-CGRectGetWidth(rect) / 2 + plotWidth * CGFloat(i) + plotGapSize / 2, -plotHeight / 2, plotWidth - plotGapSize, plotHeight)
+      let plotRect = CGRectMake(-plotWidth / 2, centerRadius, plotWidth, plotHeight - centerRadius)
+      let plotPath = UIBezierPath(rect: plotRect)
+      plotPath.applyTransform(CGAffineTransformMakeRotation(CGFloat(M_PI * 2) / CGFloat(segmentCount) * CGFloat(i)))
       
-      plotLayer.path        = UIBezierPath(rect: plotRect).CGPath
+      plotLayer.anchorPoint = CGPointZero
+      plotLayer.path        = plotPath.CGPath
       plotLayer.fillColor   = segmentColors[Int(i) % colorCount].CGColor
       plotLayer.strokeColor = plotLayer.fillColor
       plotLayer.position    = center
       
-      let anim                 = CAKeyframeAnimation(keyPath: "transform.scale.y")
-      anim.duration            = loopDuration
-      anim.cumulative          = false
-      anim.repeatCount         = Float.infinity
-      anim.values              = values
-      anim.timeOffset          = loopDuration - (loopDuration / CFTimeInterval(segmentCount) * CFTimeInterval(i))
-      anim.removedOnCompletion = false
+      let fadeAnim            = CAKeyframeAnimation(keyPath: "opacity")
+      fadeAnim.duration       = loopDuration
+      fadeAnim.cumulative     = false
+      fadeAnim.values         = [plotMinFade, plotMinFade, plotMinFade, plotMaxFade, plotMinFade]
+      fadeAnim.timeOffset     = loopDuration - (loopDuration / CFTimeInterval(segmentCount) * CFTimeInterval(i))
+      fadeAnim.repeatCount    = Float.infinity
+      fadeAnim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
       
-      plotLayer.addAnimation(anim, forKey: "plot.scale")
+      plotLayer.addAnimation(fadeAnim, forKey: "plot.scale")
     }
   }
 }
