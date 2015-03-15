@@ -29,9 +29,6 @@ import UIKit
 import QuartzCore
 
 internal final class DefaultLayer: CocardeLayer {
-  var plotMinScale: CGFloat = 0.9
-  var plotMaxScale: CGFloat = 1.2
-  
   required init(segmentCount segments: UInt, segmentColors colors: [UIColor], loopDuration duration: Double) {
     super.init(segmentCount: segments, segmentColors: colors, loopDuration: duration)
   }
@@ -51,13 +48,13 @@ internal final class DefaultLayer: CocardeLayer {
     let angle      = CGFloat(2 * M_PI / Double(segmentCount))
     let colorCount = segmentColors.count
     
-    let radius     = (min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / 2) / plotMaxScale
+    let radius     = (min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / 2)
     let startAngle = CGFloat(0)
     let endAngle   = CGFloat(2 * M_PI)
     
     for i in 0 ..< Int(segmentCount) {
       let circleRadius = radius * CGFloat(i)
-      let plotLayer = CAShapeLayer()
+      let plotLayer    = CAShapeLayer()
       insertSublayer(plotLayer, atIndex: 0)
       
       let plotPath = UIBezierPath()
@@ -69,29 +66,34 @@ internal final class DefaultLayer: CocardeLayer {
       
       let group = CAAnimationGroup()
       
-      var scaleValues: [CGFloat] = []
-      var fadeValues:[CGFloat]   = []
+      var scaleValues: [CGFloat]  = []
+      var fadeValues: [CGFloat]   = []
+      var zIndexValues: [CGFloat] = []
       
       for j in 0 ..< Int(segmentCount) {
-        let previous  = Int(j - 1) % Int(segmentCount)
-        let next      = Int(j + 1) % Int(segmentCount)
-        let afterNext = Int(j + 2) % Int(segmentCount)
+        let previous = (i - 1) % Int(segmentCount)
+        let next     = (i + 1) % Int(segmentCount)
         
-        if i == j {
-          scaleValues.append(plotMaxScale)
-        }
-        else {
+        if j == i {
+          zIndexValues.append(1)
           scaleValues.append(0)
-        }
-        
-        if i == j {
+          fadeValues.append(1)
+
+          zIndexValues.append(1)
+          scaleValues.append(1)
+          fadeValues.append(0)
+          
+          zIndexValues.append(1)
+          scaleValues.append(0)
           fadeValues.append(0)
         }
         else {
+          zIndexValues.append(0)
+          scaleValues.append(0)
           fadeValues.append(1)
         }
       }
-
+      
       let scaleAnim         = CAKeyframeAnimation(keyPath: "transform.scale")
       scaleAnim.duration    = loopDuration
       scaleAnim.cumulative  = false
@@ -103,10 +105,14 @@ internal final class DefaultLayer: CocardeLayer {
       fadeAnim.values     = fadeValues
       fadeAnim.fillMode   = kCAFillModeForwards
       
-      group.animations          = [scaleAnim, fadeAnim]
+      let zIndexAnim        = CAKeyframeAnimation(keyPath: "zPosition")
+      zIndexAnim.duration   = loopDuration
+      zIndexAnim.cumulative = false
+      zIndexAnim.values     = zIndexValues
+      
+      group.animations          = [fadeAnim, scaleAnim, zIndexAnim]
       group.duration            = loopDuration
       group.repeatCount         = Float.infinity
-      group.autoreverses        = true
       group.removedOnCompletion = false
       
       plotLayer.addAnimation(group, forKey: "circle.group")

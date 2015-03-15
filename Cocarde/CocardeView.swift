@@ -103,7 +103,7 @@ public enum CocardeStyle: Int, Printable {
   
   private var containerLayer: CocardeLayer?
   
-  public var colors = [UIColor(hexString: "#DB5C65"), UIColor(hexString: "#A7405D"), UIColor(hexString: "#3B1C57"), UIColor(hexString: "#F59155"), UIColor(hexString: "#733633")]
+  public var colors = [UIColor(hex: 0x3498db)]
   
   public override func layoutSubviews() {
     super.layoutSubviews()

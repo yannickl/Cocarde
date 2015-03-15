@@ -29,8 +29,8 @@ class DetailViewController: UIViewController {
       switch style {
       case .Default:
         cocardeView.colors       = [UIColor(hex: 0x3498db), UIColor(hex: 0xecf0f1), UIColor(hex: 0xe74c3c)]
-        cocardeView.loopDuration = 6
-        cocardeView.segmentCount = 5
+        cocardeView.loopDuration = 5
+        cocardeView.segmentCount = 3
       case .Pie:
         cocardeView.colors       = [UIColor(hex: 0xdb5c65), UIColor(hex: 0xA7405d), UIColor(hex: 0x3b1c57), UIColor(hex: 0xf59155), UIColor(hex: 0x733633)]
         cocardeView.loopDuration = 12
