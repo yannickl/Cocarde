@@ -31,7 +31,12 @@ import UIKit
   Convenient extension to create colors from hex strings.
 */
 internal extension UIColor {
-  convenience init(hexString:String) {
+  /**
+    Creates a color from an hexadecimal string.
+  
+    :param: hexString An hexadecimal string like '#eb2c34'
+  */
+  convenience init(hexString: String) {
     let hexString = hexString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
     let scanner            = NSScanner(string: hexString)
     
@@ -45,6 +50,11 @@ internal extension UIColor {
     self.init(hex: color)
   }
   
+  /**
+    Creates a color from an hexadecimal number.
+  
+    :param: hex An hexadecimal number like 0xeb2c34
+  */
   convenience init(hex: UInt32) {
     let mask = 0x000000FF
     
@@ -59,6 +69,9 @@ internal extension UIColor {
     self.init(red:red, green:green, blue:blue, alpha:1)
   }
   
+  /**
+    Returns a hexadecimal string representation of the current color.
+  */
   func toHexString() -> String {
     var r:CGFloat = 0
     var g:CGFloat = 0
@@ -74,6 +87,9 @@ internal extension UIColor {
   
   // MARK: - Lighter/Darker Colors
   
+  /**
+    Returns a lighter color.
+  */
   func lighterColor() -> UIColor {
     var h: CGFloat = 0
     var s: CGFloat = 0
@@ -87,6 +103,9 @@ internal extension UIColor {
     return self
   }
   
+  /**
+    Returns a darker color.
+  */
   func darkerColor() -> UIColor {
     var h: CGFloat = 0
     var s: CGFloat = 0

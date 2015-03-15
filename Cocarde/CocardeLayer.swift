@@ -29,7 +29,7 @@ import UIKit
 import QuartzCore
 
 /**
-  Abstract class
+  Abstract class to help the implementation of custom loader.
 */
 internal class CocardeLayer: CALayer {
   private let hideAnimationKey   = "plots.hide"

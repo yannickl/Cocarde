@@ -29,10 +29,10 @@ import UIKit
 import QuartzCore
 
 /**
-  Cocarde style
+  The visual style of the cocarde view.
 
   - Default:
-  - Pie:
+  - Pie: 
   - Equalizer:
 */
 public enum CocardeStyle: Int, Printable {
@@ -62,47 +62,56 @@ public enum CocardeStyle: Int, Printable {
 }
 
 /**
-  Cocarde view
+  Use a cocarde view to show that a task is in progress with custom
+  representations in order to replace the UIActivityIndicatorView.
+
+  You control when a cocarde animates by calling the startAnimating and 
+  stopAnimating methods. To automatically hide the cocarde when animation
+  stops, set the hidesWhenStopped property to true.
 */
 @IBDesignable public final class CocardeView: UIView {
+  /// The number of segment used to display the cocarde.
   @IBInspectable public var segmentCount: UInt = 15 {
     didSet {
       updateCocadeLayer()
     }
   }
   
+  /// The time of the loop between the start and the end of the animation.
   @IBInspectable public var loopDuration: Double = 12 {
     didSet {
       updateCocadeLayer()
     }
   }
   
-  @IBInspectable public var colorsAsString: String = "" {
-    didSet {
-      updateCocadeLayer()
-    }
-  }
-  
+  /// Manage the animation of the cocarde.
   @IBInspectable public var animating: Bool = false {
     didSet {
       containerLayer?.animating = animating
     }
   }
   
+  /**
+    A Boolean value that controls whether the receiver is hidden when the
+    animation is stopped.
+  */
   @IBInspectable public var hidesWhenStopped: Bool = false {
     didSet {
       containerLayer?.hidesWhenStopped = hidesWhenStopped
     }
   }
   
+  /// The basic appearance of the cocarde view.
   @IBInspectable public var style: CocardeStyle = .Default {
     didSet {
       updateCocadeLayer()
     }
   }
   
+  /// The layer displaying the cocarde view.
   private var containerLayer: CocardeLayer?
   
+  /// The colors used by the cocarde view.
   public var colors = [UIColor(hex: 0x3498db)]
   
   public override func layoutSubviews() {
@@ -125,6 +134,22 @@ public enum CocardeStyle: Int, Printable {
     super.awakeFromNib()
 
     updateCocadeLayer()
+  }
+  
+  // MARK: - Managing a Cocarde View
+  
+  /**
+    Starts the animation of the cocarde view.
+  */
+  func startAnimating() {
+    animating = true
+  }
+  
+  /**
+    Stops the animation of the cocarde view.
+  */
+  func stopAnimating() {
+    animating = true
   }
   
   // MARK: - Updating the Layer
