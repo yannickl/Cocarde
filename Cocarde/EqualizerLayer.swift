@@ -61,41 +61,36 @@ internal final class EqualizerLayer: CocardeLayer {
     let plotHeight = min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / plotMaxScale
     let plotWidth  = CGRectGetWidth(rect) / CGFloat(segmentCount)
     
-    // Prepare plot scale values
-    var values: [CGFloat] = []
-    
     for i in 0 ..< segmentCount {
-      var plotScale: CGFloat = 0
+      var values: [CGFloat] = []
+      var initialHeight     = CGFloat(arc4random_uniform(1000)) / 1000
       
-      if i < segmentCount / 2 {
-        plotScale = (plotMaxScale - plotMinScale) * CGFloat(sin(M_PI / Double(segmentCount / 2) * Double(i)))
+      for j in 0 ..< segmentCount {
+        var randomHeight = CGFloat(arc4random_uniform(1000)) / 1000
+
+        values.append(randomHeight)
       }
       
-      values.append(plotMinScale + plotScale)
-    }
-    
-    for i in 0 ..< 2 {
-      values.insert(plotMinScale, atIndex: 0)
-      values.append(plotMinScale)
-    }
-    
-    for i in 0 ..< segmentCount {
+      values.insert(initialHeight, atIndex: 0)
+      values.append(initialHeight)
+
       let plotLayer = CAShapeLayer()
       addSublayer(plotLayer)
       
-      let plotRect = CGRectMake(-CGRectGetWidth(rect) / 2 + plotWidth * CGFloat(i) + plotGapSize / 2, -plotHeight / 2, plotWidth - plotGapSize, plotHeight)
+      let plotRect = CGRectMake(-CGRectGetWidth(rect) / 2 + plotWidth * CGFloat(i) + plotGapSize / 2, -plotHeight / 2, plotWidth - plotGapSize, plotHeight * initialHeight)
       
       plotLayer.path        = UIBezierPath(rect: plotRect).CGPath
       plotLayer.fillColor   = segmentColors[Int(i) % colorCount].CGColor
       plotLayer.strokeColor = plotLayer.fillColor
       plotLayer.position    = center
+      plotLayer.anchorPoint = CGPointMake(0.5, 0)
       
       let anim                 = CAKeyframeAnimation(keyPath: "transform.scale.y")
       anim.duration            = loopDuration
       anim.cumulative          = false
       anim.repeatCount         = Float.infinity
+      anim.fillMode            = kCAFillModeBackwards
       anim.values              = values
-      anim.timeOffset          = loopDuration - (loopDuration / CFTimeInterval(segmentCount) * CFTimeInterval(i))
       anim.removedOnCompletion = false
       
       plotLayer.addAnimation(anim, forKey: "plot.scale")

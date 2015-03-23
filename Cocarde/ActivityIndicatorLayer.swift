@@ -35,7 +35,7 @@ internal final class ActivityIndicatorLayer: CocardeLayer {
     }
   }
   
-  var plotMinFade: CGFloat = 0.1
+  var plotMinFade: CGFloat = 0.01
   var plotMaxFade: CGFloat = 1.0
   
   required init(segmentCount segments: UInt, segmentColors colors: [UIColor], loopDuration duration: Double) {
@@ -75,13 +75,12 @@ internal final class ActivityIndicatorLayer: CocardeLayer {
       plotLayer.strokeColor = plotLayer.fillColor
       plotLayer.position    = center
       
-      let fadeAnim            = CAKeyframeAnimation(keyPath: "opacity")
-      fadeAnim.duration       = loopDuration
-      fadeAnim.cumulative     = false
-      fadeAnim.values         = [plotMinFade, plotMinFade, plotMinFade, plotMaxFade, plotMinFade]
-      fadeAnim.timeOffset     = loopDuration - (loopDuration / CFTimeInterval(segmentCount) * CFTimeInterval(i))
-      fadeAnim.repeatCount    = Float.infinity
-      fadeAnim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      let fadeAnim         = CAKeyframeAnimation(keyPath: "opacity")
+      fadeAnim.duration    = loopDuration
+      fadeAnim.cumulative  = false
+      fadeAnim.values      = [plotMinFade, plotMinFade, plotMinFade, plotMaxFade, plotMinFade]
+      fadeAnim.timeOffset  = loopDuration - (loopDuration / CFTimeInterval(segmentCount) * CFTimeInterval(i))
+      fadeAnim.repeatCount = Float.infinity
       
       plotLayer.addAnimation(fadeAnim, forKey: "plot.scale")
     }

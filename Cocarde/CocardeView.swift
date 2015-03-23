@@ -35,6 +35,7 @@ import QuartzCore
   - Pie: A pie chart indicator style
   - Equalizer: A view meter indicator style
   - ActivityIndicator: An activity indicator style like
+  - Wave: A wave propagation indicator style
 */
 public enum CocardeStyle: Int, Printable {
   /// Default style
@@ -45,9 +46,11 @@ public enum CocardeStyle: Int, Printable {
   case Equalizer = 2
   // Activity Indicator style
   case ActivityIndicator = 3
+  // Wave style
+  case Wave = 4
   
   /// A list including all values
-  static let allValues = [Default, Pie, Equalizer, ActivityIndicator]
+  static let allValues = [Default, Pie, Equalizer, ActivityIndicator, Wave]
   
   /// A textual representation of the style
   public var description : String {
@@ -60,7 +63,9 @@ public enum CocardeStyle: Int, Printable {
       case Equalizer:
         return "Equalizer"
       case ActivityIndicator:
-        return "ActivityIndicator"
+        return "Activity Indicator"
+      case Wave:
+        return "Wave"
       }
     }
   }
@@ -181,6 +186,8 @@ public enum CocardeStyle: Int, Printable {
       return EqualizerLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
     case .ActivityIndicator:
       return ActivityIndicatorLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
+    case .Wave:
+      return WaveLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
     default:
       return DefaultLayer(segmentCount: segmentCount, segmentColors: colors, loopDuration: loopDuration)
     }
