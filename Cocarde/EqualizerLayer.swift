@@ -35,9 +35,8 @@ internal final class EqualizerLayer: CocardeLayer {
     }
   }
   
-  var plotMinScale: CGFloat = 0.4
-  var plotMaxScale: CGFloat = 1.0
-  var plotGapSize: CGFloat  = 10
+  var plotMinScale: CGFloat = 0.2
+  var plotGapSize: CGFloat  = 0
   
   required init(segmentCount segments: UInt, segmentColors colors: [UIColor], loopDuration duration: Double) {
     super.init(segmentCount: segments, segmentColors: colors, loopDuration: duration)
@@ -58,42 +57,43 @@ internal final class EqualizerLayer: CocardeLayer {
     let angle      = CGFloat(2 * M_PI / Double(segmentCount))
     let colorCount = segmentColors.count
     
-    let plotHeight = min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / plotMaxScale
-    let plotWidth  = CGRectGetWidth(rect) / CGFloat(segmentCount)
-    
-    for i in 0 ..< segmentCount {
-      var values: [CGFloat] = []
-      var initialHeight     = CGFloat(arc4random_uniform(1000)) / 1000
-      
-      for j in 0 ..< segmentCount {
-        var randomHeight = CGFloat(arc4random_uniform(1000)) / 1000
+    let plotHeight    = min(CGRectGetWidth(rect), CGRectGetHeight(rect))
+    let plotMinHeight = plotHeight * plotMinScale
+    let plotWidth     = CGRectGetWidth(rect) / CGFloat(segmentCount)
 
-        values.append(randomHeight)
+    for i in 0 ..< segmentCount {
+      var values: [CGPath] = []
+      let initialHeight     = plotHeight * plotMinScale + CGFloat(arc4random_uniform(UInt32(plotHeight - plotMinHeight)))
+      let plotRect          = CGRectMake(0, 0, plotWidth - plotGapSize, -initialHeight)
+
+      for j in 0 ..< 10 {
+        let randomHeight = plotHeight * plotMinScale + CGFloat(arc4random_uniform(UInt32(plotHeight - plotMinHeight)))
+        let randomRect   = CGRectMake(0, 0, plotRect.width, -randomHeight)
+
+        values.append(UIBezierPath(rect: randomRect).CGPath)
       }
       
-      values.insert(initialHeight, atIndex: 0)
-      values.append(initialHeight)
+      values.insert(UIBezierPath(rect: plotRect).CGPath, atIndex: 0)
+      values.append(UIBezierPath(rect: plotRect).CGPath)
 
       let plotLayer = CAShapeLayer()
       addSublayer(plotLayer)
       
-      let plotRect = CGRectMake(-CGRectGetWidth(rect) / 2 + plotWidth * CGFloat(i) + plotGapSize / 2, -plotHeight / 2, plotWidth - plotGapSize, plotHeight * initialHeight)
-      
       plotLayer.path        = UIBezierPath(rect: plotRect).CGPath
       plotLayer.fillColor   = segmentColors[Int(i) % colorCount].CGColor
       plotLayer.strokeColor = plotLayer.fillColor
-      plotLayer.position    = center
+      plotLayer.position    = CGPointMake(center.x - CGRectGetWidth(rect) / 2 + plotWidth * CGFloat(i) + plotGapSize / 2, CGRectGetMaxY(rect))
       plotLayer.anchorPoint = CGPointMake(0.5, 0)
       
-      let anim                 = CAKeyframeAnimation(keyPath: "transform.scale.y")
+      let anim                 = CAKeyframeAnimation(keyPath: "path")
       anim.duration            = loopDuration
       anim.cumulative          = false
       anim.repeatCount         = Float.infinity
-      anim.fillMode            = kCAFillModeBackwards
+      anim.fillMode            = kCAFillModeForwards
       anim.values              = values
       anim.removedOnCompletion = false
       
-      plotLayer.addAnimation(anim, forKey: "plot.scale")
+      plotLayer.addAnimation(anim, forKey: "plot.path")
     }
   }
 }
