@@ -79,7 +79,7 @@ internal class CocardeLayer: CALayer {
   }
   
   /**
-    Initializes a layer with parameters
+    Initializes a layer with parameters.
   
     :param: segmentCount  Generic parameters display
     :param: segmentColors Color list
@@ -139,7 +139,7 @@ internal class CocardeLayer: CALayer {
   
   internal func startAnimating() {
     if sublayers != nil {
-      for layer in sublayers as [CALayer] {
+      for layer in sublayers as! [CALayer] {
         layer.speed = 1
       }
     }
@@ -163,7 +163,7 @@ internal class CocardeLayer: CALayer {
       let currentTime = CACurrentMediaTime()
       
       if sublayers != nil {
-        for layer in sublayers as [CALayer] {
+        for layer in sublayers as! [CALayer] {
           layer.timeOffset = layer.convertTime(currentTime, fromLayer: nil)
           layer.speed      = 0
         }

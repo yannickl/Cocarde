@@ -14,6 +14,7 @@ class MasterViewController: UITableViewController {
 
   override func awakeFromNib() {
     super.awakeFromNib()
+    
     if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
         self.clearsSelectionOnViewWillAppear = false
         self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
@@ -29,14 +30,12 @@ class MasterViewController: UITableViewController {
   // MARK: - Segues
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "showDetail" {
-        if let indexPath = self.tableView.indexPathForSelectedRow() {
-            let object = cocardeStyles[indexPath.row] as CocardeStyle
-            let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
-            controller.cocardeStyle = object
-            controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-            controller.navigationItem.leftItemsSupplementBackButton = true
-        }
+    if segue.identifier == "showDetail", let indexPath = self.tableView.indexPathForSelectedRow() {
+      let object = cocardeStyles[indexPath.row] as CocardeStyle
+      let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+      controller.cocardeStyle = object
+      controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+      controller.navigationItem.leftItemsSupplementBackButton = true
     }
   }
 
@@ -51,7 +50,7 @@ class MasterViewController: UITableViewController {
   }
 
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
 
     let object           = cocardeStyles[indexPath.row] as CocardeStyle
     cell.textLabel!.text = object.description
@@ -60,7 +59,6 @@ class MasterViewController: UITableViewController {
   }
 
   override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the specified item to be editable.
     return true
   }
 }
