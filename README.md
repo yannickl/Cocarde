@@ -1,4 +1,4 @@
-![Cocarde.swift](http://yannickloriot.com/resources/cocarde-logo.png)
+![Cocarde.swift](http://yannickloriot.com/resources/cocarde.png)
 
 ![screenshot](http://yannickloriot.com/resources/cocarde.gif)
 
