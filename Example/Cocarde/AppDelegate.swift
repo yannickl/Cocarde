@@ -10,16 +10,14 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
-
   var window: UIWindow?
 
-
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    // Override point for customization after application launch.
-    let splitViewController = self.window!.rootViewController as! UISplitViewController
-    let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-    navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
-    splitViewController.delegate = self
+    if let svc = window?.rootViewController as? UISplitViewController, let nvc = svc.viewControllers[svc.viewControllers.count - 1] as? UINavigationController {
+      nvc.topViewController?.navigationItem.leftBarButtonItem = svc.displayModeButtonItem()
+      svc.delegate                                            = self
+    }
+
     return true
   }
 
@@ -47,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
   // MARK: - Split view
 
-  func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
+  func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
       if let secondaryAsNavController = secondaryViewController as? UINavigationController {
           if let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController {
               if topAsDetailController.cocardeStyle == nil {

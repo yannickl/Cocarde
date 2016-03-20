@@ -30,7 +30,7 @@ class MasterViewController: UITableViewController {
   // MARK: - Segues
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "showDetail", let indexPath = self.tableView.indexPathForSelectedRow() {
+    if segue.identifier == "showDetail", let indexPath = self.tableView.indexPathForSelectedRow {
       let object = cocardeStyles[indexPath.row] as CocardeStyle
       let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
       controller.cocardeStyle = object
@@ -50,7 +50,7 @@ class MasterViewController: UITableViewController {
   }
 
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
 
     let object           = cocardeStyles[indexPath.row] as CocardeStyle
     cell.textLabel!.text = object.description

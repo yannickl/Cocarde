@@ -42,11 +42,11 @@ internal final class EqualizerLayer: CocardeLayer {
     super.init(segmentCount: segments, segmentColors: colors, loopDuration: duration)
   }
   
-  override init!(layer: AnyObject!) {
+  override init(layer: AnyObject) {
     super.init(layer: layer)
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
@@ -54,7 +54,6 @@ internal final class EqualizerLayer: CocardeLayer {
   
   override func drawInRect(rect: CGRect) {
     let center     = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect))
-    let angle      = CGFloat(2 * M_PI / Double(segmentCount))
     let colorCount = segmentColors.count
     
     let plotHeight    = min(CGRectGetWidth(rect), CGRectGetHeight(rect))
@@ -66,7 +65,7 @@ internal final class EqualizerLayer: CocardeLayer {
       let initialHeight     = plotHeight * plotMinScale + CGFloat(arc4random_uniform(UInt32(plotHeight - plotMinHeight)))
       let plotRect          = CGRectMake(0, 0, plotWidth - plotGapSize, -initialHeight)
 
-      for j in 0 ..< 10 {
+      for _ in 0 ..< 10 {
         let randomHeight = plotHeight * plotMinScale + CGFloat(arc4random_uniform(UInt32(plotHeight - plotMinHeight)))
         let randomRect   = CGRectMake(0, 0, plotRect.width, -randomHeight)
 

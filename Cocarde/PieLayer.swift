@@ -36,11 +36,11 @@ internal final class PieLayer: CocardeLayer {
     super.init(segmentCount: segments, segmentColors: colors, loopDuration: duration)
   }
   
-  override init!(layer: AnyObject!) {
+  override init(layer: AnyObject) {
     super.init(layer: layer)
   }
 
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
   }
   

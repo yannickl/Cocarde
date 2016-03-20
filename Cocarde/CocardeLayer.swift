@@ -81,9 +81,9 @@ internal class CocardeLayer: CALayer {
   /**
     Initializes a layer with parameters.
   
-    :param: segmentCount  Generic parameters display
-    :param: segmentColors Color list
-    :param: loopDuration  Duration in second for the loop animation
+    - parameter segmentCount:  Generic parameters display
+    - parameter segmentColors: Color list
+    - parameter loopDuration:  Duration in second for the loop animation
   */
   required init(segmentCount segments: UInt, segmentColors colors: [UIColor], loopDuration duration: Double) {
     segmentCount  = segments
@@ -93,7 +93,7 @@ internal class CocardeLayer: CALayer {
     super.init()
   }
   
-  override init!(layer: AnyObject!) {
+  override init(layer: AnyObject) {
     if layer is CocardeLayer {
       segmentCount     = layer.segmentCount
       segmentColors    = layer.segmentColors
@@ -108,7 +108,7 @@ internal class CocardeLayer: CALayer {
     super.init(layer: layer)
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
@@ -122,8 +122,8 @@ internal class CocardeLayer: CALayer {
   // MARK: - Drawing Cocarde Activity
   
   internal func clearDrawing() {
-    if sublayers != nil {
-      for layer in sublayers {
+    if let layers = sublayers {
+      for layer in layers {
         layer.removeAllAnimations()
         layer.removeFromSuperlayer()
       }
@@ -138,8 +138,8 @@ internal class CocardeLayer: CALayer {
   // MARK: - Managing Animations
   
   internal func startAnimating() {
-    if sublayers != nil {
-      for layer in sublayers as! [CALayer] {
+    if let layers = sublayers {
+      for layer in layers {
         layer.speed = 1
       }
     }
@@ -162,8 +162,8 @@ internal class CocardeLayer: CALayer {
     if !hidesWhenStopped {
       let currentTime = CACurrentMediaTime()
       
-      if sublayers != nil {
-        for layer in sublayers as! [CALayer] {
+      if let layers = sublayers {
+        for layer in layers {
           layer.timeOffset = layer.convertTime(currentTime, fromLayer: nil)
           layer.speed      = 0
         }

@@ -33,11 +33,11 @@ internal final class DefaultLayer: CocardeLayer {
     super.init(segmentCount: segments, segmentColors: colors, loopDuration: duration)
   }
   
-  override init!(layer: AnyObject!) {
+  override init(layer: AnyObject) {
     super.init(layer: layer)
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
@@ -45,7 +45,6 @@ internal final class DefaultLayer: CocardeLayer {
   
   override func drawInRect(rect: CGRect) {
     let center     = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect))
-    let angle      = CGFloat(2 * M_PI / Double(segmentCount))
     let colorCount = segmentColors.count
     
     let radius     = (min(CGRectGetWidth(rect), CGRectGetHeight(rect)) / 2)
@@ -53,7 +52,6 @@ internal final class DefaultLayer: CocardeLayer {
     let endAngle   = CGFloat(2 * M_PI)
     
     for i in 0 ..< Int(segmentCount) {
-      let circleRadius = radius * CGFloat(i)
       let plotLayer    = CAShapeLayer()
       insertSublayer(plotLayer, atIndex: 0)
       
@@ -71,9 +69,6 @@ internal final class DefaultLayer: CocardeLayer {
       var zIndexValues: [CGFloat] = []
       
       for j in 0 ..< Int(segmentCount) {
-        let previous = (i - 1) % Int(segmentCount)
-        let next     = (i + 1) % Int(segmentCount)
-        
         if j == i {
           zIndexValues.append(1)
           scaleValues.append(0)

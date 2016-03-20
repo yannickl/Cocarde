@@ -37,7 +37,7 @@ import QuartzCore
   - ActivityIndicator: An activity indicator style like
   - Wave: A wave propagation indicator style
 */
-public enum CocardeStyle: Int, Printable {
+public enum CocardeStyle: Int, CustomStringConvertible {
   /// Default style
   case Default = 0
   /// Pie style
@@ -136,10 +136,13 @@ public enum CocardeStyle: Int, Printable {
     super.didMoveToSuperview()
     
     if containerLayer == nil {
-      containerLayer                   = layerWithStyle(style)
-      containerLayer?.hidesWhenStopped = hidesWhenStopped
-      containerLayer?.animating        = animating
-      layer.addSublayer(containerLayer)
+      let cl              = layerWithStyle(style)
+      cl.hidesWhenStopped = hidesWhenStopped
+      cl.animating        = animating
+
+      containerLayer = cl
+
+      layer.addSublayer(cl)
     }
   }
   
@@ -168,14 +171,17 @@ public enum CocardeStyle: Int, Printable {
   // MARK: - Updating the Layer
   
   private func updateCocadeLayer() {
-    if containerLayer != nil {
-      containerLayer?.removeFromSuperlayer()
+    if let cl = containerLayer {
+      cl.removeFromSuperlayer()
     }
+
+    let cl              = layerWithStyle(style)
+    cl.hidesWhenStopped = hidesWhenStopped
+    cl.animating        = animating
+
+    containerLayer = cl
     
-    containerLayer                   = layerWithStyle(style)
-    containerLayer?.hidesWhenStopped = hidesWhenStopped
-    containerLayer?.animating        = animating
-    layer.addSublayer(containerLayer)
+    layer.addSublayer(cl)
   }
   
   private func layerWithStyle(style: CocardeStyle) -> CocardeLayer {

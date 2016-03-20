@@ -34,7 +34,7 @@ internal extension UIColor {
   /**
     Creates a color from an hexadecimal string.
   
-    :param: hexString An hexadecimal string like '#eb2c34'
+    - parameter hexString: An hexadecimal string like '#eb2c34'
   */
   convenience init(hexString: String) {
     let hexString = hexString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
@@ -53,7 +53,7 @@ internal extension UIColor {
   /**
     Creates a color from an hexadecimal number.
   
-    :param: hex An hexadecimal number like 0xeb2c34
+    - parameter hex: An hexadecimal number like 0xeb2c34
   */
   convenience init(hex: UInt32) {
     let mask = 0x000000FF
