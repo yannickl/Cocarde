@@ -1,7 +1,5 @@
 ![Cocarde.swift](http://yannickloriot.com/resources/cocarde.png)
 
-![screenshot](http://yannickloriot.com/resources/cocarde.gif)
-
 ### Installation
 
 The recommended approach to use _Cocarde_ in your project is using the [CocoaPods](http://cocoapods.org/) package manager, as it provides flexible dependency management and dead simple installation.
