@@ -1,44 +1,5 @@
 ![Cocarde.swift](http://yannickloriot.com/resources/cocarde.png)
 
-### Installation
-
-The recommended approach to use _Cocarde_ in your project is using the [CocoaPods](http://cocoapods.org/) package manager, as it provides flexible dependency management and dead simple installation.
-
-#### CocoaPods
-
-Install CocoaPods if not already available:
-
-``` bash
-$ [sudo] gem install cocoapods
-$ pod setup
-```
-Go to the directory of your Xcode project, and Create and Edit your Podfile and add _QRCodeReade.swift_:
-
-``` bash
-$ cd /path/to/MyProject
-$ touch Podfile
-$ edit Podfile
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-pod 'Cocarde', '~> 1.0.0'
-```
-
-Install into your project:
-
-``` bash
-$ pod install
-```
-
-Open your project in Xcode from the .xcworkspace file (not the usual project file)
-
-``` bash
-$ open MyProject.xcworkspace
-```
-
-#### Manually
-
-[Download](https://github.com/YannickL/Cocarde/archive/master.zip) the project and copy the `Cocarde` folder into your project to use it in.
-
 ## Usage
 
 ## Contact
