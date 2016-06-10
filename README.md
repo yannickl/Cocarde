@@ -1,7 +1,5 @@
 ![Cocarde.swift](http://yannickloriot.com/resources/cocarde.png)
 
-## Usage
-
 ## Contact
 
 Yannick Loriot
