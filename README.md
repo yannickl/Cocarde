@@ -1,12 +1,5 @@
 ![Cocarde.swift](http://yannickloriot.com/resources/cocarde.png)
 
-## Contact
-
-Yannick Loriot
- - [https://twitter.com/yannickloriot](https://twitter.com/yannickloriot)
- - [contact@yannickloriot.com](mailto:contact@yannickloriot.com)
-
-
 ## License (MIT)
 
 Copyright (c) 2016-present - Yannick Loriot
