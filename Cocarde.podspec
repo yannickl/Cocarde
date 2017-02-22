@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
 
   s.framework    = 'AVFoundation'
-  s.source_files = 'Cocarde/*.swift'
+  s.source_files = 'Cocarde/**/*.swift'
   s.requires_arc = true
 end
